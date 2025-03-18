@@ -1,5 +1,5 @@
 pub mod utils;
-use crate::float::ApproxEq;
+use crate::traits::ApproxEq;
 #[macro_export]
 macro_rules! assert_approx_eq {
     // Case with custom epsilon
@@ -9,10 +9,9 @@ macro_rules! assert_approx_eq {
 
         assert!(
             (left_val).approx_cmp(&right_val),
-            "assertion failed: `(left ≈ right)`\n  left: `{:?}`\n right: `{:?}`\n diff: `{:?}`",
+            "assertion failed: `(left ≈ right)`\n  left: `{:?}`\n right: `{:?}`\n",
             left_val,
-            right_val,
-            (left_val - right_val).abs()
+            right_val
         );
     }};
 }

@@ -1,8 +1,8 @@
 mod canvas;
 mod color;
-mod float;
 mod geo;
 mod test;
+mod traits;
 
 fn main() {
     println!("Hello, world!");

@@ -159,10 +159,10 @@ mod tests {
     fn sub_vector_from_point() {
         let v1 = Vector::new(1., 2., 3.);
         let p1 = Point::new(4., 5., 6.);
-        let p2 = v1 - p1;
-        assert_eq!(p2.x, 5.);
-        assert_eq!(p2.x, 5.);
-        assert_eq!(p2.x, 5.);
+        let p2 = p1 - v1;
+        assert_eq!(p2.x, 3.);
+        assert_eq!(p2.y, 3.);
+        assert_eq!(p2.z, 3.);
     }
 
     #[test]

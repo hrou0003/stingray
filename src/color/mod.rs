@@ -67,7 +67,7 @@ impl Mul for Color {
 
 #[cfg(test)]
 mod tests {
-    use crate::{assert_approx_eq, float::ApproxEq};
+    use crate::{assert_approx_eq, traits::ApproxEq};
 
     use super::*;
 

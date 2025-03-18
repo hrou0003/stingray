@@ -24,6 +24,19 @@ impl Matrix {
         }
     }
 
+    pub fn identity() -> Matrix {
+        Matrix {
+            rows: 4,
+            cols: 4,
+            data: vec![
+                vec![1., 0., 0., 0.],
+                vec![0., 1., 0., 0.],
+                vec![0., 0., 1., 0.],
+                vec![0., 0., 0., 1.],
+            ],
+        }
+    }
+
     pub fn translation(x: f64, y: f64, z: f64) -> Matrix {
         Matrix {
             rows: 4,
@@ -166,7 +179,6 @@ impl Matrix {
                     polarity * Self::sub_determinant(Self::sub_matrix(&self.to_vec(), i, j))?;
             }
         }
-        dbg!(polarities);
         Ok(result)
     }
 
@@ -247,9 +259,9 @@ impl Mul<Point> for Matrix {
     type Output = Point;
 
     fn mul(self, other: Point) -> Point {
-        let x = self[0][0] * other.x + self[0][1] * other.y + self[0][2] * other.z;
-        let y = self[1][0] * other.x + self[1][1] * other.y + self[1][2] * other.z;
-        let z = self[2][0] * other.x + self[2][1] * other.y + self[2][2] * other.z;
+        let x = self[0][0] * other.x + self[0][1] * other.y + self[0][2] * other.z + self[0][3];
+        let y = self[1][0] * other.x + self[1][1] * other.y + self[1][2] * other.z + self[1][3];
+        let z = self[2][0] * other.x + self[2][1] * other.y + self[2][2] * other.z + self[2][3];
         Point { x, y, z }
     }
 }
@@ -268,6 +280,13 @@ impl Mul<Vector> for Matrix {
 impl Mul<Ray> for Matrix {
     type Output = Ray;
     fn mul(self, ray: Ray) -> Ray {
+        Ray::new(self.clone() * ray.origin, self * ray.direction)
+    }
+}
+
+impl Mul<&Ray> for Matrix {
+    type Output = Ray;
+    fn mul(self, ray: &Ray) -> Ray {
         Ray::new(self.clone() * ray.origin, self * ray.direction)
     }
 }
@@ -440,7 +459,9 @@ mod tests {
     #[test]
     fn test_matrix_translate() {
         let matrix = Matrix::translation(1., 2., 3.);
-        let result = matrix * Point::new(0., 0., 0.);
+        let result = matrix.clone() * Point::new(0., 0., 0.);
         assert_eq!(result, Point::new(1., 2., 3.));
+        let vector = Vector::new(1., 2., 3.);
+        assert_eq!(matrix.clone() * vector, vector);
     }
 }

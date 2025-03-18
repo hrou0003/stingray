@@ -15,6 +15,10 @@ impl Ray {
     pub fn point_at(&self, distance: f64) -> Point {
         self.origin + self.direction * distance
     }
+
+    pub fn evaluate(&self, t: f64) -> Point {
+        self.origin + self.direction * t
+    }
 }
 
 impl Add<Matrix> for Ray {
@@ -52,5 +56,14 @@ mod tests {
         let result = translation * ray;
         assert_eq!(result.origin, Point::new(4., 6., 8.));
         assert_eq!(result.direction, Vector::new(0., 1., 0.));
+    }
+
+    #[test]
+    fn scale_ray() {
+        let ray = Ray::new(Point::new(1., 2., 3.), Vector::new(0., 1., 0.));
+        let scale = Matrix::scaling(2., 3., 4.);
+        let result = scale * ray;
+        assert_eq!(result.origin, Point::new(2., 6., 12.));
+        assert_eq!(result.direction, Vector::new(0., 3., 0.));
     }
 }
