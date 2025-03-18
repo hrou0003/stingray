@@ -436,4 +436,11 @@ mod tests {
         let answer = Matrix::from_vec(answer);
         assert_eq!(result, answer);
     }
+
+    #[test]
+    fn test_matrix_translate() {
+        let matrix = Matrix::translation(1., 2., 3.);
+        let result = matrix * Point::new(0., 0., 0.);
+        assert_eq!(result, Point::new(1., 2., 3.));
+    }
 }
