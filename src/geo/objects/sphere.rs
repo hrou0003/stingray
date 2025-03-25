@@ -47,7 +47,6 @@ impl Sphere {
     }
 
     pub fn normal(&self, point: Point) -> Result<Vector, String> {
-        dbg!(&self.transformation);
         let transform_inverse = dbg!(self.transformation.inverse()?);
         let object_point = transform_inverse.clone() * point;
         let object_normal = (object_point - self.center).norm();
