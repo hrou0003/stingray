@@ -18,6 +18,10 @@ impl Vector {
         (self.x * self.x + self.y * self.y + self.z * self.z).sqrt()
     }
 
+    pub fn dot(&self, other: Self) -> f64 {
+        self.x * other.x + self.y * other.y + self.z * other.z
+    }
+
     pub fn norm(&self) -> Self {
         self.clone() / self.mag()
     }
@@ -28,6 +32,11 @@ impl Vector {
             y: self.z * other.x - self.x * other.z,
             z: self.x * other.y - self.y * other.x,
         }
+    }
+
+    pub fn reflect(&self, n: Vector) -> Self {
+        let dot = self.dot(n);
+        self.clone() - n.clone() * (2. * dot)
     }
 }
 
@@ -125,6 +134,8 @@ impl Mul for Vector {
 
 #[cfg(test)]
 mod tests {
+    use crate::traits::SpecificRound;
+
     use super::*;
 
     #[test]
@@ -271,5 +282,15 @@ mod tests {
             dbg!(&env.projectile.position);
         }
         assert!(env.projectile.position.y < 0.);
+    }
+
+    #[test]
+    fn test_reflect_vector() {
+        let v = Vector::new(0., -1., 0.);
+        let n = Vector::new(f64::sqrt(2.) / 2., f64::sqrt(2.) / 2., 0.);
+        let r = v.reflect(n);
+        assert_eq!(r.x.specific_round(3), 1.);
+        assert_eq!(r.y.specific_round(3), 0.);
+        assert_eq!(r.z.specific_round(3), 0.);
     }
 }

@@ -47,7 +47,8 @@ impl Sphere {
     }
 
     pub fn normal(&self, point: Point) -> Result<Vector, String> {
-        let transform_inverse = self.transformation.inverse()?;
+        dbg!(&self.transformation);
+        let transform_inverse = dbg!(self.transformation.inverse()?);
         let object_point = transform_inverse.clone() * point;
         let object_normal = (object_point - self.center).norm();
         let world_normal = transform_inverse.transpose()? * object_normal;
@@ -209,6 +210,8 @@ mod tests {
         let normal = sphere
             .normal(Point::new(0., f64::sqrt(2.) / 2., -f64::sqrt(2.) / 2.))
             .unwrap();
-        assert_eq!(normal, Vector::new(0., 0.97014, -0.24254));
+        assert_eq!(normal.x.specific_round(3), 0.);
+        assert_eq!(normal.y.specific_round(5), 0.97014);
+        assert_eq!(normal.z.specific_round(5), -0.24254);
     }
 }

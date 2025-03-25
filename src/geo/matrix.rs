@@ -64,7 +64,7 @@ impl Matrix {
     }
 
     pub fn rotation(angle: f64, axis: Rotation) -> Matrix {
-        let mut matrix = Matrix::new(4, 4);
+        let mut matrix = Matrix::identity();
         let cosr = angle.cos();
         let sinr = angle.sin();
         match axis {
