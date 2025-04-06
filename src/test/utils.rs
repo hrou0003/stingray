@@ -38,7 +38,10 @@ impl Environment {
 mod tests {
     use std::f64::consts::PI;
 
-    use crate::geo::matrix::{Matrix, Rotation};
+    use crate::geo::{
+        matrix::{Matrix, Rotation},
+        objects::geometry::Geometry,
+    };
 
     use super::*;
 

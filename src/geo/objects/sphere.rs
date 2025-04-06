@@ -2,6 +2,8 @@ use std::ops::Mul;
 
 use crate::geo::{matrix::Matrix, point::Point, ray::Ray, vector::Vector};
 
+use super::geometry::Geometry;
+
 pub struct Sphere {
     center: Point,
     radius: f64,
@@ -20,12 +22,14 @@ impl Sphere {
     pub fn unit_sphere() -> Self {
         Sphere::new(Point::new(0., 0., 0.), 1.)
     }
+}
 
-    pub fn transform(&mut self, transformation: Matrix) {
+impl Geometry for Sphere {
+    fn set_transform(&mut self, transformation: Matrix) {
         self.transformation = transformation * self.transformation.clone();
     }
 
-    pub fn intersect(&self, ray: &Ray) -> Result<Vec<f64>, String> {
+    fn intersect(&self, ray: &Ray) -> Result<Vec<f64>, String> {
         // Transform the ray by the inverse of the sphere's transformation
         let inverse = self.transformation.inverse()?;
         let ray = inverse * ray;
@@ -46,7 +50,7 @@ impl Sphere {
         Ok(vec![t, t2])
     }
 
-    pub fn normal(&self, point: Point) -> Result<Vector, String> {
+    fn normal(&self, point: Point) -> Result<Vector, String> {
         let transform_inverse = dbg!(self.transformation.inverse()?);
         let object_point = transform_inverse.clone() * point;
         let object_normal = (object_point - self.center).norm();
@@ -205,7 +209,7 @@ mod tests {
     fn test_normal_transformed_inverse() {
         let mut sphere = Sphere::unit_sphere();
         let m = Matrix::scaling(1., 0.5, 1.) * Matrix::rotation(PI / 5., Rotation::Z);
-        sphere.transform(m);
+        sphere.set_transform(m);
         let normal = sphere
             .normal(Point::new(0., f64::sqrt(2.) / 2., -f64::sqrt(2.) / 2.))
             .unwrap();

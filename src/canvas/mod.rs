@@ -1,9 +1,11 @@
-use crate::{color::Color, geo::point::Point};
+pub mod scene_object;
+use crate::{color::Color, geo::point::Point, lighting::PointLight};
 
 pub struct Canvas {
     pub width: u32,
     pub height: u32,
     pub pixels: Vec<Color>,
+    pub lights: Vec<PointLight>,
 }
 
 impl Canvas {
@@ -12,6 +14,7 @@ impl Canvas {
             width,
             height,
             pixels: vec![Color::black(); width as usize * height as usize],
+            lights: vec![],
         }
     }
 
@@ -43,6 +46,8 @@ impl Canvas {
         let (x, y) = (point.x as u32, self.height - point.y as u32);
         self.set_pixel(x, y, color);
     }
+
+    pub fn add_light(&mut self, light: PointLight) {}
 }
 
 #[cfg(test)]
