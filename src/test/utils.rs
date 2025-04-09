@@ -1,8 +1,3 @@
-use crate::canvas::Canvas;
-use crate::color::Color;
-use crate::geo::objects::hit::Hit;
-use crate::geo::objects::sphere::Sphere;
-use crate::geo::ray::Ray;
 use crate::geo::{point::Point, vector::Vector};
 
 #[derive(Debug, Clone, Copy, PartialEq)]
@@ -44,6 +39,10 @@ mod tests {
     };
 
     use super::*;
+    use crate::canvas::Canvas;
+    use crate::color::Color;
+    use crate::geo::objects::sphere::Sphere;
+    use crate::geo::ray::Ray;
 
     #[test]
     fn test_sphere_shadow() {
