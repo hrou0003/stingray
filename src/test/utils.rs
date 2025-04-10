@@ -31,7 +31,6 @@ impl Environment {
 
 #[cfg(test)]
 mod tests {
-    use std::f64::consts::PI;
 
     use crate::geo::{
         matrix::{Matrix, Rotation},
