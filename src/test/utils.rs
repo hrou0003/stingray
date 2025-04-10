@@ -32,10 +32,7 @@ impl Environment {
 #[cfg(test)]
 mod tests {
 
-    use crate::geo::{
-        matrix::{Matrix, Rotation},
-        objects::geometry::Geometry,
-    };
+    use crate::geo::objects::geometry::Geometry;
 
     use super::*;
     use crate::canvas::Canvas;
