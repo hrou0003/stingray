@@ -89,7 +89,6 @@ mod tests {
 
     use super::*;
     use crate::{
-        assert_approx_eq,
         geo::{matrix::Rotation, objects::hit::Hit, ray::Ray, vector::Vector},
         traits::SpecificRound,
     };
