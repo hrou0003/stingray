@@ -31,7 +31,6 @@ impl Environment {
 
 #[cfg(test)]
 mod tests {
-
     use crate::geo::objects::geometry::Geometry;
 
     use super::*;
