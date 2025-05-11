@@ -47,7 +47,6 @@ mod tests {
         // Create a sphere at the center of the image
         let mut sphere = Sphere::new(Point::new(150., 150., 50.0), 50.0);
 
-        // Create a light position (above and to the side)
         let light_position = Point::new(200.0, 225.0, -200.0);
 
         // Define colors
