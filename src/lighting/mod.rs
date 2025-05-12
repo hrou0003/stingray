@@ -1,7 +1,10 @@
 use crate::{
+    assert_fractional,
     color::Color,
     geo::{objects::sphere::Sphere, point::Point},
 };
+
+pub mod texture;
 
 pub struct PointLight {
     pub position: Point,
@@ -23,13 +26,12 @@ pub struct Material {
     shininess: f32,
 }
 
-pub trait Texture {
-    fn set_material(&mut self, material: Material);
-    fn get_material(&self) -> Material;
-}
-
 impl Material {
     pub fn new(color: Color, ambient: f32, diffuse: f32, specular: f32, shininess: f32) -> Self {
+        assert_fractional!(ambient);
+        assert_fractional!(diffuse);
+        assert_fractional!(specular);
+        assert_fractional!(shininess);
         Self {
             color,
             ambient,
@@ -37,15 +39,5 @@ impl Material {
             specular,
             shininess,
         }
-    }
-}
-
-impl Texture for Material {
-    fn set_material(&mut self, material: Material) {
-        *self = material;
-    }
-
-    fn get_material(&self) -> Material {
-        *self
     }
 }

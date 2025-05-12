@@ -15,3 +15,17 @@ macro_rules! assert_approx_eq {
         );
     }};
 }
+
+#[macro_export]
+macro_rules! assert_fractional {
+    // Case with custom epsilon
+    ($val:expr) => {{
+        let val = $val;
+
+        assert!(
+            val > 0.0 && val < 1.0,
+            "assertion failed: value not fractional\n  value: `{:?}`\n ",
+            val,
+        );
+    }};
+}

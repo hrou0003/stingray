@@ -1,4 +1,5 @@
-use crate::{geo::objects::geometry::Geometry, lighting::Texture};
+use crate::geo::objects::geometry::Geometry;
+use crate::lighting::texture::Texture;
 
 pub struct SceneObject<G: Geometry, T: Texture> {
     pub geometry: G,
@@ -19,7 +20,7 @@ mod tests {
             matrix::Matrix, objects::geometry::Geometry, objects::sphere::Sphere, point::Point,
             ray::Ray, vector::Vector,
         },
-        lighting::{Material, PointLight, Texture},
+        lighting::{texture::Texture, Material, PointLight},
     };
 
     #[test]
