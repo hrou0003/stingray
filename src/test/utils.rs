@@ -49,7 +49,6 @@ mod tests {
 
         let light_position = Point::new(200.0, 225.0, -200.0);
 
-        // Define colors
         let background_color = Color::new(50.0, 50.0, 50.0); // Dark gray
         let shadow_color = Color::new(0.0, 0.0, 0.0); // Black
 
