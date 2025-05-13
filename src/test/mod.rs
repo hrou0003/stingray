@@ -18,7 +18,6 @@ macro_rules! assert_approx_eq {
 
 #[macro_export]
 macro_rules! assert_fractional {
-    // Case with custom epsilon
     ($val:expr) => {{
         let val = $val;
 
