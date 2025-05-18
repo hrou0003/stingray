@@ -6,7 +6,7 @@ pub trait ApproxEq {
 
 impl ApproxEq for f64 {
     fn approx_cmp(&self, other: &Self) -> bool {
-        //
+        // TODO: Use a better epsilon
         (self - other).abs() < f64::EPSILON
     }
 }
