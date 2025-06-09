@@ -7,6 +7,7 @@ pub struct Color {
     pub b: f64,
 }
 
+//
 impl Color {
     pub fn new(r: f64, g: f64, b: f64) -> Color {
         Color { r, g, b }
