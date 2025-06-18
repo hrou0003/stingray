@@ -8,6 +8,7 @@ pub enum Rotation {
     Z,
 }
 
+//
 #[derive(Debug, PartialEq, Clone)]
 pub struct Matrix {
     rows: usize,
