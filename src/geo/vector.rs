@@ -25,6 +25,7 @@ impl Vector {
     pub fn norm(&self) -> Self {
         self.clone() / self.mag()
     }
+    //
 
     pub fn cross(&self, other: Self) -> Self {
         Self {
